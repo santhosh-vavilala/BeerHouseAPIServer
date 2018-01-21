@@ -15,6 +15,18 @@ router.get('/', function (req, res) {
   //res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+router.get('/:qstring', function (req, res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  request({
+    uri: 'http://api.brewerydb.com/v2/search',
+    qs: {
+      key: 'dd1b9ea105cb7bcabd012c76c9576c51',
+      q: req.params.qstring
+    }
+  }).pipe(res);
+  //res.json({ message: 'hooray! welcome to our api!' });   
+});
+
 app.use('/api', router);
 app.listen(port);
 console.log('Magic happens on port ' + port);
